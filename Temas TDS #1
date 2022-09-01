@@ -1,0 +1,73 @@
+drop database LojaEletrica;
+
+create database LojaEletrica;
+
+USE LojaEletrica;
+
+create table produtos(
+codigo numeric(3) not null,
+nome varchar(50) not null,
+preco numeric(5,2) not null,
+tipo char(1) null,
+-- [S]uprimento, [C]omponente, [P]eriférico
+constraint PK1 primary key(codigo));
+
+insert into produtos
+values(10,'HD',200,'C');
+
+insert into produtos
+values(11,'Memoria',250,'C');
+
+insert into produtos
+values(12,'Impressora',680,'P');
+
+insert into produtos
+values(13,'Processador',600,'C');
+
+insert into produtos
+values(14,'DVD-RW',2,'S');
+
+insert into produtos
+values(15,'Papel A4',19,'S');
+
+insert into produtos
+values(16,'Scanner',199,'P');
+
+select * from produtos;
+
+/* A */
+select nome from produtos;
+select count(codigo) from produtos; /Conta os produtos -- A/
+
+/* B */
+
+select tipo from produtos;
+
+/* C */
+
+select count(codigo) from produtos
+where tipo like 'S';
+
+select count(codigo) from produtos
+where tipo like 'P';
+
+select count(codigo) from produtos
+where tipo like 'C';
+
+/* Preços medios dos produtos e preços medios dos produtos de cada tipo. */
+
+select avg(preco)
+where produtos
+group by tipo;
+
+select avg(preco)
+from produtos
+where tipo like 'S';
+
+select avg(preco)
+from produtos
+where tipo like 'C';
+
+select avg(preco)
+from produtos
+where tipo like 'P';
